@@ -1,5 +1,19 @@
 import "tailwindcss"
 
+/**
+ *
+ * @param {Element[]} children
+ * @returns {string}
+ * @constructor
+ */
+function App(children) {
+    return `
+<div class="container-full">
+    ${children.map((child) => child.outerHTML).join("")}
+</div>
+`
+}
+
 customElements.define('x-app', class extends HTMLElement {
     constructor() {
         super()
@@ -12,10 +26,7 @@ customElements.define('x-app', class extends HTMLElement {
     render() {
         const children = Array.from(this.children)
 
-        this.innerHTML = `
-<div class="container-full">
-${children.map((child) => child.outerHTML).join("")}
-</div>`
+        this.innerHTML = App(children)
     }
 
     render2() {
